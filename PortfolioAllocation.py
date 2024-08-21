@@ -6,19 +6,19 @@ import yfinance as yf
 
 # Define stocks and timeframe
 stocks = [
+'AAL',
+'BBWI',
+'CHTR',
+'ETSY',
+'F',
+'NCLH',
+'NWS',
 'PARA',
-'PWR',
-'ORCL',
-'VST',
-'AAPL',
-'RL',
-'NTAP',
-'XOM',
-'EMN',
-'CTRA'
+'QCOM',
+'TPR'
 ]
-start_date = '2022-07-01'
-end_date = '2024-07-01'
+start_date = '2022-08-14'
+end_date = '2024-08-14'
 
 
 # Fetching stock data

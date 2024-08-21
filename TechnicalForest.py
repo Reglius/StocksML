@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import pytz
 import time
+import joblib
 
 # Define function to get valuation measures
 def get_valuation_measures(ticker, start_date, end_date):
@@ -23,10 +24,8 @@ def get_valuation_measures(ticker, start_date, end_date):
     pb_ratio = stock.info.get('priceToBook', np.nan)
     dividend_yield = stock.info.get('dividendYield', np.nan)
     ps_ratio = stock.info.get('priceToSalesTrailing12Months', np.nan)
-    #pcf_ratio = stock.info.get('priceToCashflow', np.nan)
     ev = stock.info.get('enterpriseValue', np.nan)
     ev_ebitda = stock.info.get('enterpriseToEbitda', np.nan)
-    #pfcf_ratio = stock.info.get('priceToFreeCashflow', np.nan)
     gross_margin = stock.info.get('grossMargins', np.nan)
     operating_margin = stock.info.get('operatingMargins', np.nan)
     net_profit_margin = stock.info.get('profitMargins', np.nan)
@@ -123,6 +122,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Train the Random Forest model
 rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
 rf_model.fit(X_train, y_train)
+
+try:
+    joblib.dump(rf_model, r"C:\Users\pawc3\Desktop\random_forest.joblib")
+except Exception as e:
+    print("Error saving randomforest")
 
 # Evaluate the model
 y_pred = rf_model.predict(X_test)
